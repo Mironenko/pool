@@ -111,31 +111,12 @@ LOCAL_C_INCLUDES	:= $(common_c_includes)
 LOCAL_CFLAGS		:= $(common_cflags) \
 	-DPCSCD \
 	-DSIMCLIST_NO_DUMPRESTORE
-LOCAL_LDLIBS		:= -ldl
-LOCAL_SHARED_LIBRARIES := libc libcrypto libdl libusb libccid
+LOCAL_LDLIBS		:= -ldl -lc
+LOCAL_SHARED_LIBRARIES := libusb libccid
 LOCAL_PRELINK_MODULE	:= false
 LOCAL_MODULE		:= pcscd
 LOCAL_MODULE_TAGS	:= eng
 include $(BUILD_EXECUTABLE)
 
-
-# ============ build testpcsc ==========================================
-include $(CLEAR_VARS)
-LOCAL_LDLIBS		:= -ldl
-LOCAL_SHARED_LIBRARIES := libc libcrypto libdl
-LOCAL_PRELINK_MODULE	:= false
-
-
-LOCAL_SRC_FILES		:= src/testpcsc.c
-LOCAL_C_INCLUDES	:= \
-	$(LOCAL_PATH) \
-	$(LOCAL_PATH)/src/PCSC \
-	$(LOCAL_PATH)/src 
-LOCAL_CFLAGS		:= $(common_cflags)
-LOCAL_STATIC_LIBRARIES	:= libpcsclite
-LOCAL_MODULE_TAGS       := eng
-LOCAL_MODULE		:= testpcsc
-
-include $(BUILD_EXECUTABLE)
 
 

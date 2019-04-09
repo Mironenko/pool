@@ -3,8 +3,11 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_LDFLAGS    := -nodefaultlibs
 
+LOCAL_MODULE     := msc
+LOCAL_SRC_FILES  := libmsc.so
 LOCAL_LDLIBS     := -llog -L$(SYSROOT)/usr/lib 
-LOCAL_LDFLAGS    := -nodefaultlibs
+
+include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_LDFLAGS    := -nodefaultlibs

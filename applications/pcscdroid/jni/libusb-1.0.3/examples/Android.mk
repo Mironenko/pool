@@ -1,6 +1,7 @@
 LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
+LOCAL_LDFLAGS    := -nodefaultlibs
 LOCAL_SRC_FILES:= lsusb.c
 LOCAL_MODULE := lsusb
 LOCAL_MODULE_TAGS = eng 

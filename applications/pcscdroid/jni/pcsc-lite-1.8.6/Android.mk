@@ -28,6 +28,7 @@ common_c_includes := \
 # ============ build libpcsclite.a ====================================
 
 #include $(CLEAR_VARS)
+LOCAL_LDFLAGS    := -nodefaultlibs
 
 #LOCAL_SRC_FILES := \
 #	src/debug.c \
@@ -53,6 +54,7 @@ common_c_includes := \
 # ============ build libpcsclite.so ====================================
 
 include $(CLEAR_VARS)
+LOCAL_LDFLAGS    := -nodefaultlibs
 
 LOCAL_SRC_FILES := \
 	src/debug.c \
@@ -78,6 +80,7 @@ include $(BUILD_SHARED_LIBRARY)
 # ============ build pcscd =============================================
 
 include $(CLEAR_VARS)
+LOCAL_LDFLAGS    := -nodefaultlibs
 
 LOCAL_SRC_FILES := \
 	src/debuglog.c \

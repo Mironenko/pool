@@ -30,6 +30,7 @@ common_c_includes := \
 # ============ build libpcsclite.a ====================================
 
 include $(CLEAR_VARS)
+LOCAL_LDFLAGS    := -nodefaultlibs
 
 LOCAL_SRC_FILES := \
 	src/debug.c \
@@ -53,7 +54,7 @@ include $(BUILD_STATIC_LIBRARY)
 
 # ============ build libpcsclite.so ====================================
 
-include $(CLEAR_VARS)
+include $(CLEAR_VARS)\nLOCAL_LDFLAGS    := -nodefaultlibs
 
 LOCAL_SRC_FILES := \
 	src/debug.c \
@@ -78,7 +79,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 # ============ build pcscd =============================================
 
-include $(CLEAR_VARS)
+include $(CLEAR_VARS)\nLOCAL_LDFLAGS    := -nodefaultlibs
 
 LOCAL_SRC_FILES := \
 	src/atrhandler.c \
@@ -125,7 +126,7 @@ include $(BUILD_EXECUTABLE)
 LOCAL_LDLIBS		:= -ldl
 LOCAL_SHARED_LIBRARIES := libc libcrypto libdl
 LOCAL_PRELINK_MODULE	:= false
-include $(CLEAR_VARS)
+include $(CLEAR_VARS)\nLOCAL_LDFLAGS    := -nodefaultlibs
 
 LOCAL_SRC_FILES		:= src/testpcsc.c
 LOCAL_C_INCLUDES	:= $(common_c_includes)

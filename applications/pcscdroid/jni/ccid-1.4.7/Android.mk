@@ -6,6 +6,7 @@ common_cflags := \
 	
 
 include $(CLEAR_VARS)
+LOCAL_LDFLAGS    := -nodefaultlibs
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH) \
 	$(LOCAL_PATH)/src \

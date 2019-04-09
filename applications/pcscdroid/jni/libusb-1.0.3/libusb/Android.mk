@@ -1,5 +1,6 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
+LOCAL_LDFLAGS    := -nodefaultlibs
 
 LOCAL_SRC_FILES:= \
  core.c \

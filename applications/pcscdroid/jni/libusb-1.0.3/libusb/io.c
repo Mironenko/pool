@@ -1854,6 +1854,11 @@ out:
 
 /* do the actual event handling. assumes that no other thread is concurrently
  * doing the same thing. */
+struct pollfd {
+    int fd;           /* file descriptor */
+    short events;     /* requested events */
+    short revents;    /* returned events */
+};
 static int handle_events(struct libusb_context *ctx, struct timeval *tv)
 {
 	int r;

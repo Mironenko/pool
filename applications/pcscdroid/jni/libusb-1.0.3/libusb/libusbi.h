@@ -34,6 +34,10 @@
 #include <libusb.h>
 #include <version.h>
 
+#include "./os/threads_posix.h"
+
+#define POLL_NFDS_TYPE unsigned int
+
 /* Inside the libusb code, mark all public functions as follows:
  *   return_type API_EXPORTED function_name(params) { ... }
  * But if the function returns a pointer, mark it as follows:

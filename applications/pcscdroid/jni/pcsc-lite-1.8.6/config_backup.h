@@ -147,13 +147,13 @@
 #define PACKAGE_VERSION "1.8.6"
 
 /* pcscd filename */
-#define PCSCD_BINARY "/data/data/com.gieseckedevrient.android.pcscdroid/files/pcscd"
+#define PCSCD_BINARY "/test_pcscd/files/pcscd"
 
 /* Enabled PC/SC lite features */
-#define PCSCLITE_FEATURES " Linux i686-pc-linux-gnu serial usb usbdropdir=/data/data/com.gieseckedevrient.android.pcscdroid/files/usb ipcdir=/data/data/com.gieseckedevrient.android.pcscdroid/files/ipc configdir=/data/data/com.gieseckedevrient.android.pcscdroid/files/etc"
+#define PCSCLITE_FEATURES " Linux i686-pc-linux-gnu serial usb usbdropdir=/test_pcscd/files/usb ipcdir=/test_pcscd/files/ipc configdir=/test_pcscd/files/etc"
 
 /* directory containing USB drivers */
-#define PCSCLITE_HP_DROPDIR "/data/data/com.gieseckedevrient.android.pcscdroid/files/usb"
+#define PCSCLITE_HP_DROPDIR "/test_pcscd/files/usb"
 
 /* PC/SC target architecture */
 #define PCSC_ARCH "Linux"
@@ -169,7 +169,7 @@
 #define TIME_WITH_SYS_TIME 1
 
 /* directory containing IPC files */
-#define USE_IPCDIR "/data/data/com.gieseckedevrient.android.pcscdroid/files/ipc"
+#define USE_IPCDIR "/test_pcscd/files/ipc"
 
 /* Use serial conf file mechanism */
 #define USE_SERIAL 1

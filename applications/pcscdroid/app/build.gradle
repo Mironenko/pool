@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "com.gieseckedevrient.android.pcscdroid"
+        minSdkVersion 21
+        targetSdkVersion 28
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path file('/home/nsk/projects/seek-for-android/applications/pcscdroid/jni/Android.mk')
+        }
+    }
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libpcsclite.so'
+        pickFirst 'lib/arm64-v8a/libpcsclite.so'
+        pickFirst 'lib/x86/libpcsclite.so'
+        pickFirst 'lib/x86_64/libpcsclite.so'
+
+        pickFirst 'lib/armeabi-v7a/libccid.so'
+        pickFirst 'lib/arm64-v8a/libccid.so'
+        pickFirst 'lib/x86/libccid.so'
+        pickFirst 'lib/x86_64/libccid.so'
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:support-v4:28.0.0'
+}

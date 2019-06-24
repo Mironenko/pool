@@ -2,6 +2,8 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_LDFLAGS    := -nodefaultlibs
 
+LOCAL_CFLAGS += -DENABLE_DEBUG_LOGGING
+
 LOCAL_SRC_FILES:= \
  core.c \
  descriptor.c \

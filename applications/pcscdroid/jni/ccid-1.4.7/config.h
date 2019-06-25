@@ -108,7 +108,7 @@
 #define PACKAGE_VERSION "1.4.7"
 
 /* directory containing USB drivers */
-#define PCSCLITE_HP_DROPDIR "/test_pcscd/files/usb"
+#define PCSCLITE_HP_DROPDIR "/data/evotor/pcscd/files/usb"
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */

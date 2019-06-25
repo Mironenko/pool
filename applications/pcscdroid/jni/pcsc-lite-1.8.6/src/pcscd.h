@@ -23,8 +23,8 @@
 #define SCARD_INSERTED			0x0002	/**< Card was inserted */
 #define SCARD_REMOVED			0x0004	/**< Card was removed */
 
-#define PCSCLITE_CONFIG_DIR		"/test_pcscd/files/etc"
-#define PCSCLITE_IPC_DIR		"/test_pcscd/files/ipc"
+#define PCSCLITE_CONFIG_DIR		"/data/evotor/pcscd/files/etc"
+#define PCSCLITE_IPC_DIR		"/data/evotor/pcscd/files/ipc"
 
 #define PCSCLITE_IPC_DIR		USE_IPCDIR
 #define PCSCLITE_RUN_PID		PCSCLITE_IPC_DIR "/pcscd.pid"

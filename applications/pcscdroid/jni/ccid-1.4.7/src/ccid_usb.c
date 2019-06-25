@@ -694,9 +694,9 @@ read_again:
 	if (rv < 0)
 	{
 		*length = 0;
-		DEBUG_CRITICAL5("read failed (%d/%d): %d %s",
+		DEBUG_CRITICAL6("read failed (%d/%d): %d %s, timeout: %d",
 			usbDevice[reader_index].bus_number,
-			usbDevice[reader_index].device_address, rv, strerror(errno));
+			usbDevice[reader_index].device_address, rv, strerror(errno), usbDevice[reader_index].ccid.readTimeout);
 
 		if (ENODEV == errno)
 			return STATUS_NO_SUCH_DEVICE;

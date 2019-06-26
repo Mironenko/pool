@@ -56,10 +56,10 @@ void printBytesHex(unsigned char * buf, int size) {
 void print_devs(libusb_device **devs)
 {
 	libusb_device *dev;
-	int i = 0;
+	int d = 0;
 
     bool rutokenFound = false;
-	while ((dev = devs[i++]) != NULL) {
+	while ((dev = devs[d++]) != NULL) {
 		struct libusb_device_descriptor desc;
 		int r = libusb_get_device_descriptor(dev, &desc);
 		if (r < 0) {
@@ -88,7 +88,7 @@ void print_devs(libusb_device **devs)
             printf("\nEnumerating endpoints...\n");
             Endpoints endpoints;
             /* if multiple interfaces use the first one with CCID class type */
-            for (i = 0; i < config_desc->bNumInterfaces; i++) {
+            for (int i = 0; i < config_desc->bNumInterfaces; i++) {
                 /* CCID Class? */
                 if (config_desc->interface[i].altsetting->bInterfaceClass == 0xb
                     || config_desc->interface[i].altsetting->bInterfaceClass == 0xff

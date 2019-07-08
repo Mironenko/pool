@@ -18,6 +18,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 
 #include <libusb/libusb.h>
@@ -136,26 +137,34 @@ void print_devs(libusb_device **devs)
             printf("\nATR:");
             printBytesHex(atr, atrLength);
 
-            sleep(5);
+            int maxBuffer = 65556;
+            int bufferSizes[] = {maxBuffer, maxBuffer - 1, maxBuffer - 100, maxBuffer * 0.9, maxBuffer * 0.8, maxBuffer * 0.7,
+                                maxBuffer * 0.5, maxBuffer * 0.4, maxBuffer * 0.3, maxBuffer * 0.2, maxBuffer * 0.1,
+                                1000, 500, 200, 100};
+            for (int b = 0; b < sizeof(bufferSizes) / sizeof(bufferSizes[0]); ++b) {
+                sleep(1);
+                printf("\nWriting data...\n");
+                unsigned char command[] = {0x6F, 0x07, 0x00, 0x00, 0x00, 0x00, 0x02/*sequance*/,
+                                           0x00, 0x00, 0x00, 0x00, 0xA4, 0x00, 0x00, 0x02, 0x3F, 0x00};
+                int commandLength = 0;
+                e = libusb_bulk_transfer(handle, endpoints.bulk_out, command, sizeof(command),
+                                              &commandLength, timeout);
+                printf("Xfer returned with %d", e);
+                printf("\nSent %d bytes with data: \n", commandLength);
+                printBytesHex(command, commandLength);
 
-            printf("\nWriting data...\n");
-            unsigned char command[] = {0x6F, 0x07, 0x00, 0x00, 0x00, 0x00, 0x02/*sequance*/,
-                                       0x00, 0x00, 0x00, 0x00, 0xA4, 0x00, 0x00, 0x02, 0x3F, 0x00};
-            int commandLength = 0;
-            e = libusb_bulk_transfer(handle, endpoints.bulk_out, command, sizeof(command),
-                                          &commandLength, timeout);
-            printf("Xfer returned with %d", e);
-            printf("\nSent %d bytes with data: \n", commandLength);
-            printBytesHex(command, commandLength);
+                const int bufferSize = bufferSizes[b];
+                printf("\nReading reply %d...\n\n", bufferSize);
 
-            printf("\nReading reply 65556...\n\n");
-            unsigned char reply[65556] = {};
-            int receivedLength = 0;
-            e = libusb_bulk_transfer(handle, endpoints.bulk_in, reply, sizeof(reply),
-                                     &receivedLength, timeout);
-            printf("Xfer returned with %d\n", e);
-            printf("\nReceived %d bytes with data: \n", receivedLength);
-            printBytesHex(reply, receivedLength);
+                unsigned char * reply = malloc(bufferSize);
+                int receivedLength = 0;
+                e = libusb_bulk_transfer(handle, endpoints.bulk_in, reply, bufferSize,
+                                         &receivedLength, timeout);
+                printf("Xfer returned with %d\n", e);
+                printf("\nReceived %d bytes with data: \n", receivedLength);
+                printBytesHex(reply, receivedLength);
+                free(reply);
+            }
 
             printf("\nPower off CCID device...\n\n");
             unsigned char pwrOffCmd[10] = {0x63/*IccPowerOff*/, 0/*dwLength*/, 0x00, 0x00,

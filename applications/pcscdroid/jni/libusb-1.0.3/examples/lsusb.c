@@ -22,18 +22,8 @@
 
 #include <libusb/libusb.h>
 #include <stdbool.h>
+#include <unistd.h>
 
-
-//int controlUSB(libusb_device_handle *dev_handle, uint16_t interface, uint8_t requesttype, uint8_t request, uint16_t value,
-//               unsigned char *bytes, uint16_t size, unsigned int timeout)
-//{
-//    int ret = libusb_control_transfer(dev_handle, requesttype, request, value, interface,
-//                                  bytes, size, timeout);
-//    if (ret < 0) {
-//        printf("control failed");
-//    }
-//    return ret;
-//}
 typedef struct {
     /*
      * Endpoints
@@ -44,8 +34,7 @@ typedef struct {
 } Endpoints;
 
 void printBytesHex(unsigned char * buf, int size) {
-    int i;
-    for (i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         if (i > 0)
             printf(" ");
         printf("%02X", buf[i]);
@@ -55,8 +44,9 @@ void printBytesHex(unsigned char * buf, int size) {
 
 void print_devs(libusb_device **devs)
 {
-	libusb_device *dev;
-	int d = 0;
+    sleep(5);
+    libusb_device *dev;
+    int d = 0;
 
     bool rutokenFound = false;
 	while ((dev = devs[d++]) != NULL) {
@@ -146,8 +136,7 @@ void print_devs(libusb_device **devs)
             printf("\nATR:");
             printBytesHex(atr, atrLength);
 
-            //controlUSB(handle, 0, 0xA1, 0x62, interface, atr, sizeof(atr), timeout);
-            //printf("\nATR: %s", atr);
+            sleep(5);
 
             printf("\nWriting data...\n");
             unsigned char command[] = {0x6F, 0x07, 0x00, 0x00, 0x00, 0x00, 0x02/*sequance*/,
@@ -159,8 +148,8 @@ void print_devs(libusb_device **devs)
             printf("\nSent %d bytes with data: \n", commandLength);
             printBytesHex(command, commandLength);
 
-            printf("\nReading reply...\n\n");
-            unsigned char reply[256] = {};
+            printf("\nReading reply 65556...\n\n");
+            unsigned char reply[65556] = {};
             int receivedLength = 0;
             e = libusb_bulk_transfer(handle, endpoints.bulk_in, reply, sizeof(reply),
                                      &receivedLength, timeout);

@@ -45,7 +45,6 @@ void printBytesHex(unsigned char * buf, int size) {
 
 void print_devs(libusb_device **devs)
 {
-    sleep(5);
     libusb_device *dev;
     int d = 0;
 
@@ -121,7 +120,7 @@ void print_devs(libusb_device **devs)
             }
 
             printf("\nPower on CCID device...\n");
-            const int timeout = 5000;
+            const int timeout = 1000;
             unsigned char pwrOnCmd[10] = {0x62/*IccPowerOn*/, 0/*dwLength*/, 0x00, 0x00, 0x00,
                                           0x00/*slot number*/, 0x01/*sequance*/,  0x01/*5v*/, 0x00, 0x00};
             int pwrOnLength = 0;
@@ -142,7 +141,6 @@ void print_devs(libusb_device **devs)
                                 maxBuffer * 0.5, maxBuffer * 0.4, maxBuffer * 0.3, maxBuffer * 0.2, maxBuffer * 0.1,
                                 1000, 500, 200, 100};
             for (int b = 0; b < sizeof(bufferSizes) / sizeof(bufferSizes[0]); ++b) {
-                sleep(1);
                 printf("\nWriting data...\n");
                 unsigned char command[] = {0x6F, 0x07, 0x00, 0x00, 0x00, 0x00, 0x02/*sequance*/,
                                            0x00, 0x00, 0x00, 0x00, 0xA4, 0x00, 0x00, 0x02, 0x3F, 0x00};
